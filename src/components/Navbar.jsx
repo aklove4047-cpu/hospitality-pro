@@ -11,10 +11,11 @@ import {
   UtensilsCrossed,
   BedDouble,
   SlidersHorizontal,
-  ExternalLink
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 
-export const Navbar = () => {
+export const Navbar = ({ onOpenWebsite }) => {
   const {
     data,
     currentTenant,
@@ -65,15 +66,22 @@ export const Navbar = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span className="text-slate-300 font-medium">Reseller Cloud Engine:</span>
-          <span className="text-emerald-400 font-semibold">{data.reseller.name}</span>
+          <span className="text-slate-300 font-medium">Hotel & Resto Master OS:</span>
+          <span className="text-emerald-400 font-semibold">{currentTenant.name}</span>
           <span className="hidden md:inline text-slate-600">|</span>
-          <span className="hidden md:inline">Client Plan: <strong className="text-white capitalize">{currentTenant.plan}</strong></span>
-          <span className="hidden md:inline text-slate-600">|</span>
-          <span className="hidden md:inline">Valid Till: <strong className="text-slate-300">{currentTenant.validUntil}</strong></span>
+          <span className="hidden md:inline">Plan: <strong className="text-white capitalize">{currentTenant.plan}</strong></span>
         </div>
 
         <div className="flex items-center gap-3">
+          {/* View Public Website Button */}
+          <button
+            onClick={onOpenWebsite}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>🌐 View Guest Website</span>
+          </button>
+
           {/* Quick role switcher dropdown */}
           <div className="relative">
             <button
@@ -155,14 +163,14 @@ export const Navbar = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
-                HospitalityPro
+                {currentTenant.name}
               </span>
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold tracking-widest bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                PRO 2.0
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold tracking-widest bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                ADMIN PANEL
               </span>
             </div>
             <p className="text-[11px] text-slate-400 hidden sm:block">
-              Multi-tenant Hotel & Restaurant Operating System
+              Integrated Hotel & Restaurant Operations Suite
             </p>
           </div>
         </div>
@@ -190,7 +198,7 @@ export const Navbar = () => {
               <div className="absolute right-0 mt-2 w-80 glass-dropdown rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 border border-slate-700/70">
                 <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between">
                   <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                    Select Client Tenant
+                    Select Client Property
                   </span>
                   <button
                     onClick={() => {
@@ -200,7 +208,7 @@ export const Navbar = () => {
                     }}
                     className="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1"
                   >
-                    + Add New Client
+                    + Add New Property
                   </button>
                 </div>
                 <div className="py-1 max-h-72 overflow-y-auto space-y-1">
@@ -238,4 +246,3 @@ export const Navbar = () => {
     </header>
   );
 };
-

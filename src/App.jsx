@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
@@ -14,13 +14,41 @@ import { ResellerAdmin } from './components/ResellerAdmin';
 import { TenantSettings } from './components/TenantSettings';
 import { AnalyticsReports } from './components/AnalyticsReports';
 import { StaffManagement } from './components/StaffManagement';
+import { PublicWebsite } from './components/PublicWebsite';
 import { AlertCircle, CheckCircle, Info } from 'lucide-react';
 
 const MainLayout = () => {
   const { activeTab, toast, currentRole } = useApp();
+  const [viewMode, setViewMode] = useState('website'); // 'website' | 'admin'
 
   const isCustomerQrOnly = currentRole === 'qr_customer';
 
+  // If viewing the Public Guest Website
+  if (viewMode === 'website' && !isCustomerQrOnly) {
+    return (
+      <>
+        {/* Toast Notification */}
+        {toast && (
+          <div className="fixed bottom-5 right-5 z-50 animate-in slide-in-from-bottom-3 duration-300">
+            <div className={`px-4 py-3 rounded-2xl shadow-2xl border flex items-center gap-2.5 text-xs font-bold ${
+              toast.type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
+              toast.type === 'info' ? 'bg-indigo-950/90 border-indigo-500 text-indigo-200' :
+              'bg-slate-900/95 border-emerald-500/50 text-emerald-300'
+            }`}>
+              {toast.type === 'error' ? <AlertCircle className="w-4 h-4 text-rose-400" /> :
+               toast.type === 'info' ? <Info className="w-4 h-4 text-indigo-400" /> :
+               <CheckCircle className="w-4 h-4 text-emerald-400" />}
+              <span>{toast.message}</span>
+            </div>
+          </div>
+        )}
+
+        <PublicWebsite onOpenAdmin={() => setViewMode('admin')} />
+      </>
+    );
+  }
+
+  // Operations & Admin Panel
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-brand-500 selection:text-white">
       {/* Toast Notification */}
@@ -40,7 +68,7 @@ const MainLayout = () => {
       )}
 
       {/* Top Navbar */}
-      <Navbar />
+      <Navbar onOpenWebsite={() => setViewMode('website')} />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Left Sidebar */}
