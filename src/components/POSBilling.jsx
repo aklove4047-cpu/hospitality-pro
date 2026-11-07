@@ -712,3 +712,4 @@ export const POSBilling = () => {
     </div>
   );
 };
+

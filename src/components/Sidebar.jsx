@@ -13,7 +13,9 @@ import {
   Settings,
   ShieldCheck,
   Lock,
-  Smartphone
+  Smartphone,
+  BarChart3,
+  Users
 } from 'lucide-react';
 
 export const Sidebar = () => {
@@ -31,7 +33,8 @@ export const Sidebar = () => {
     {
       title: "Core",
       items: [
-        { id: 'dashboard', label: 'Executive Hub', icon: LayoutDashboard, roles: ['superadmin', 'owner', 'manager'] }
+        { id: 'dashboard', label: 'Executive Hub', icon: LayoutDashboard, roles: ['superadmin', 'owner', 'manager'] },
+        { id: 'analytics', label: 'Analytics & GST Reports', icon: BarChart3, roles: ['superadmin', 'owner', 'manager'] }
       ]
     },
     {
@@ -60,6 +63,7 @@ export const Sidebar = () => {
     {
       title: "Administration",
       items: [
+        { id: 'staff', label: 'Staff & Roles (FR-10)', icon: Users, roles: ['superadmin', 'owner'] },
         { id: 'reseller', label: 'Reseller Portal', icon: ShieldCheck, roles: ['superadmin'] },
         { id: 'settings', label: 'Tenant Settings & GST', icon: Settings, roles: ['superadmin', 'owner'] }
       ]

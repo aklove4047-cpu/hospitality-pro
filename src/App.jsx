@@ -12,6 +12,8 @@ import { InventoryManager } from './components/InventoryManager';
 import { BillsHistory } from './components/BillsHistory';
 import { ResellerAdmin } from './components/ResellerAdmin';
 import { TenantSettings } from './components/TenantSettings';
+import { AnalyticsReports } from './components/AnalyticsReports';
+import { StaffManagement } from './components/StaffManagement';
 import { AlertCircle, CheckCircle, Info } from 'lucide-react';
 
 const MainLayout = () => {
@@ -47,6 +49,7 @@ const MainLayout = () => {
         {/* Dynamic Center Stage */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
           {activeTab === 'dashboard' && <Dashboard />}
+          {activeTab === 'analytics' && <AnalyticsReports />}
           {activeTab === 'pos' && <POSBilling />}
           {activeTab === 'kitchen' && <KitchenScreen />}
           {activeTab === 'tables' && <TableManagement />}
@@ -55,6 +58,7 @@ const MainLayout = () => {
           {activeTab === 'bookings' && <HotelFrontDesk />}
           {activeTab === 'inventory' && <InventoryManager />}
           {activeTab === 'bills' && <BillsHistory />}
+          {activeTab === 'staff' && <StaffManagement />}
           {activeTab === 'reseller' && <ResellerAdmin />}
           {activeTab === 'settings' && <TenantSettings />}
         </main>

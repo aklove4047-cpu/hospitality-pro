@@ -613,3 +613,4 @@ export const HotelFrontDesk = () => {
     </div>
   );
 };
+
